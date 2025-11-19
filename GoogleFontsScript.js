@@ -49,6 +49,7 @@ window.simulateTyping = async (selector, text) => {
 }
 
 window.getIcon = async (iconName, time = 600)=>{
+    await new Promise(r=>setTimeout(r, 200))
     await window.simulateTyping("#mat-input-0", iconName);
     await new Promise(r=>setTimeout(r, time))
     document.querySelector('button[icon-item][aria-label]').click()

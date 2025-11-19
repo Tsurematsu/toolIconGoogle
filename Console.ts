@@ -10,7 +10,7 @@ import InjectIcons from "./InjectIcons";
 inquirer.registerPrompt("autocomplete", autocomplete);
 
 export default class Console {
-    private static iconTime = 600;
+    private static iconTime = 300;
     private static searchTime = 400;
     public static async menu() {
         let loop = true;
@@ -22,52 +22,26 @@ export default class Console {
                     await Console.search();
                     await new Promise(r => setTimeout(r, 1000));
                 },
-                "Extraer de archivo ts": async () => {
+                "Extraer de archivo ts (withgoogle templates)": async () => {
                     const file = await selectFile();
                     if (!file) return;
                     console.log("Archivo seleccionado:", file);
                     await this.downloadIconToFile(file)
                     await new Promise(r => setTimeout(r, 1000));
                 },
-                "Extraer de directorio": async () => {
+                "Extraer de directorio (withgoogle templates)": async () => {
                     const dir = await selectDirectory();
                     if (!dir) return;
                     console.log("Directorio seleccionado:", dir);
                     await this.downloadIconToDir(dir)
                     await new Promise(r => setTimeout(r, 1000));
                 },
-                "Mapear imágenes": async () => {
-                    await this.MapearImágenes();
+                "Implementar iconos (stitch with google templates)": async () => {
+                    await this.RemplaceToSvg()
                     await new Promise(r => setTimeout(r, 1000));
                 },
-                "Config dir descargas": async () => {
-                    const dir = await selectDirectory();
-                    if (!dir) return;
-                    console.log("Directorio seleccionado:", dir);
-                    await GoogleFonts.setDirDownloads(dir)
-                },
-                "Config time get icon": async () => {
-                    const { value } = await inquirer.prompt([
-                        {
-                            type: "input",
-                            name: "value",
-                            message: `[${this.iconTime}] Time get icon (ms)`,
-                            validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
-                        }
-                    ]);
-                    try { this.iconTime = parseInt(value); } catch (error) { }
-                },
-                "Config time search icons": async () => {
-                    const { value } = await inquirer.prompt([
-                        {
-                            type: "input",
-                            name: "value",
-                            message: `[${this.searchTime}] Time search (ms)`,
-                            validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
-                        }
-                    ]);
-                    try { this.searchTime = parseInt(value); } catch (error) { }
-                },
+                "Mapear imágenes": async () => {await this.MapearImágenes();},
+                "Config": async () => {await this.Config()},
                 "separator_0": "",
                 "Salir": async () => { loop = false; },
                 "separator_1": "",
@@ -141,7 +115,78 @@ export default class Console {
     }
 
     private static async RemplaceToSvg(){
+        const options = {
+            "file": async () => {
+                const file = await selectFile();
+                if (!file) return;
+                await InjectIcons(GoogleFonts.getDownloadPath(), file);
+            },
+            "directory": async () => {
+                const dir = await selectDirectory();
+                if (!dir) return;
+                const allFiles = await getSourceFiles(dir);
+                for (const element of allFiles) {
+                    await InjectIcons(GoogleFonts.getDownloadPath(), element);
+                    await new Promise(r => setTimeout(r, 100));
+                }
+            },
+            "exit":()=>{},
+        }
+        const { option } = await inquirer.prompt([
+            {
+                type: "list",
+                name: "option",
+                message: "Selecciona una opción:",
+                choices: Object.keys(options).map(e => e.includes('separator') ? new inquirer.Separator() : e)
+            }
+        ]);
+        await options[option]?.()
+    }
+
+    private static async Config(){
+        const options = {
+            "dir descargas": async () => {
+                const dir = await selectDirectory();
+                if (!dir) return;
+                console.log("Directorio seleccionado:", dir);
+                await GoogleFonts.setDirDownloads(dir)
+            },
+            "time icon": async () => {
+                const { value } = await inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "value",
+                        message: `[${this.iconTime}] Time get icon (ms)`,
+                        validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
+                    }
+                ]);
+                try { this.iconTime = parseInt(value); } catch (error) { }
+            },
+            "time search": async () => {
+                const { value } = await inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "value",
+                        message: `[${this.searchTime}] Time search (ms)`,
+                        validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
+                    }
+                ]);
+                try { this.searchTime = parseInt(value); } catch (error) { }
+            },
+            "volver":async ()=>{},
+        }
+        const { option } = await inquirer.prompt([
+            {
+                type: "list",
+                name: "option",
+                message: "Selecciona una opción:",
+                choices: Object.keys(options).map(e => e.includes('separator') ? new inquirer.Separator() : e)
+            }
+        ]);
+        await options[option]?.()
+    }
+
+    private static async stitch_with_google_templates(){
         
-        await InjectIcons(assetsPath, pagePath);
     }
 }
