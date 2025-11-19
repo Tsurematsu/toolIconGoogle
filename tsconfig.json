@@ -14,5 +14,9 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-  }
+    "outDir": "./dist",        /* Carpeta donde se generará el JS */
+    "rootDir": "./",           /* Raíz de tu código fuente */
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

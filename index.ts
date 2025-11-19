@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import 'dotenv/config'
 import GoogleFonts from './GoogleFonts';
 import Console from './Console';
