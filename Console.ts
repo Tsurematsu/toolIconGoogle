@@ -5,6 +5,7 @@ import { selectDirectory } from "./selectDirectory";
 import { selectFile } from "./selectFile";
 import ExtractToFile from "./ExtractToFile";
 import { getSourceFiles } from "./getFiles";
+import MapImage from "./MapImage";
 inquirer.registerPrompt("autocomplete", autocomplete);
 
 export default class Console {
@@ -32,6 +33,14 @@ export default class Console {
                     if (!dir) return;
                     console.log("Directorio seleccionado:", dir);
                     await this.downloadIconToDir(dir)
+                    await new Promise(r => setTimeout(r, 1000));
+                },
+                "Mapear imágenes de directorio (react)": async () => {
+                    await MapImage(GoogleFonts.getDownloadPath(), "react");
+                    await new Promise(r => setTimeout(r, 1000));
+                },
+                "Mapear imágenes de directorio (lit)": async () => {
+                    await MapImage(GoogleFonts.getDownloadPath(), "lit");
                     await new Promise(r => setTimeout(r, 1000));
                 },
                 "Config dir descargas": async () => {

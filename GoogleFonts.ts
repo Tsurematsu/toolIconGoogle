@@ -14,6 +14,9 @@ export default class GoogleFonts{
     private static client = null;
     private static resolveIcon = (_r)=>{}
     private static browser : Browser | null = null;
+    public static getDownloadPath = ()=>{
+        return this.downloadPath
+    }
     public static async setDirDownloads(newPath){
         this.downloadPath = newPath
         await this.client.send('Browser.setDownloadBehavior', {
