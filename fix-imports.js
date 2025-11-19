@@ -92,18 +92,14 @@ async function runBuildTasks() {
             let hasChanges = false;
 
             // --- TAREA 1: Inyectar __dirname si se usa ---
-            // Verificamos si usa __dirname y si no hemos inyectado ya el shim
             if (content.includes('__dirname') && !content.includes('const __dirname = __dirnamePath(__filename)')) {
                 
-                // Manejo del Shebang (#!/usr/bin/env node)
-                // Si existe, el shim debe ir DESPUÉS, o el script fallará al ejecutarse
                 if (content.startsWith('#!')) {
                     const firstLineIndex = content.indexOf('\n');
                     const shebang = content.slice(0, firstLineIndex + 1);
                     const rest = content.slice(firstLineIndex + 1);
                     content = shebang + DIRNAME_SHIM + rest;
                 } else {
-                    // Si no hay shebang, va al principio
                     content = DIRNAME_SHIM + content;
                 }
                 
@@ -114,10 +110,15 @@ async function runBuildTasks() {
             // --- TAREA 2: Arreglar Imports (.js) ---
             const regex = /(from|import|export)(\s+['"])([.][^'"]+)(['"])/g;
             content = content.replace(regex, (match, keyword, spaceAndQuote, route, quoteEnd) => {
+                // 1. Si ya tiene extensión .js o .json, ignorar
                 if (route.endsWith('.js') || route.endsWith('.json')) return match;
                 
+                // 2. NUEVA VALIDACIÓN: Si la ruta contiene interpolación de strings (${...})
+                // significa que es una plantilla generadora de código y no un import real.
+                if (route.includes('${')) return match;
+                
                 hasChanges = true;
-                fixedImports++; // Contamos cada import arreglado
+                fixedImports++; 
                 return `${keyword}${spaceAndQuote}${route}.js${quoteEnd}`;
             });
 
