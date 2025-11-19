@@ -37,6 +37,7 @@ export default class Console {
 
                     if (dir) {
                         console.log("Directorio seleccionado:", dir);
+                        GoogleFonts.setDirDownloads(dir)
                     } else {
                         console.log("Cancelado.");
                     }

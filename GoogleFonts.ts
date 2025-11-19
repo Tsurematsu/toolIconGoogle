@@ -11,17 +11,26 @@ export default class GoogleFonts{
     private static page : Page = null;
     private static iconSelected = ''
     private static cacheNameFile = ''
+    private static client = null;
     private static resolveIcon = (_r)=>{}
     private static browser : Browser | null = null;
-    private static async downloadManager(){
-        const client = await this.page.createCDPSession();
-        await client.send('Browser.setDownloadBehavior', {
+    public static async setDirDownloads(newPath){
+        this.downloadPath = newPath
+        await this.client.send('Browser.setDownloadBehavior', {
             behavior: 'allow',
             downloadPath: this.downloadPath,
             eventsEnabled: true
         });
-        client.on('Browser.downloadWillBegin', (event) => {this.cacheNameFile = event.suggestedFilename;});
-        client.on('Browser.downloadProgress', (event) => {
+    }
+    private static async downloadManager(){
+        this.client = await this.page.createCDPSession();
+        await this.client.send('Browser.setDownloadBehavior', {
+            behavior: 'allow',
+            downloadPath: this.downloadPath,
+            eventsEnabled: true
+        });
+        this.client.on('Browser.downloadWillBegin', (event) => {this.cacheNameFile = event.suggestedFilename;});
+        this.client.on('Browser.downloadProgress', (event) => {
             if (event.state === 'completed') {
                 const oldPath = path.join(this.downloadPath, this.cacheNameFile);
                 const newPath = path.join(this.downloadPath, `${this.iconSelected}.svg`);
