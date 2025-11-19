@@ -6,6 +6,7 @@ import { selectFile } from "./selectFile";
 import ExtractToFile from "./ExtractToFile";
 import { getSourceFiles } from "./getFiles";
 import MapImage from "./MapImage";
+import InjectIcons from "./InjectIcons";
 inquirer.registerPrompt("autocomplete", autocomplete);
 
 export default class Console {
@@ -21,7 +22,7 @@ export default class Console {
                     await Console.search();
                     await new Promise(r => setTimeout(r, 1000));
                 },
-                "Extraer de archivo": async () => {
+                "Extraer de archivo ts": async () => {
                     const file = await selectFile();
                     if (!file) return;
                     console.log("Archivo seleccionado:", file);
@@ -137,5 +138,10 @@ export default class Console {
             }
         ]);
         await options[option]?.()
+    }
+
+    private static async RemplaceToSvg(){
+        
+        await InjectIcons(assetsPath, pagePath);
     }
 }
