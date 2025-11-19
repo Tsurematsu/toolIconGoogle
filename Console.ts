@@ -9,6 +9,19 @@ import MapImage from "./MapImage";
 import InjectIcons from "./InjectIcons";
 inquirer.registerPrompt("autocomplete", autocomplete);
 
+async function menuOptions(options : Record<string, any>, print = "Selecciona una opción:"){
+    console.clear()
+    const { option } = await inquirer.prompt([
+        {
+            type: "list",
+            name: "option",
+            message: print,
+            choices: Object.keys(options).map(e => e.includes('separator') ? new inquirer.Separator() : e)
+        }
+    ]);
+    await options[option]?.()
+}
+
 export default class Console {
     private static iconTime = 300;
     private static searchTime = 400;
@@ -16,45 +29,19 @@ export default class Console {
         let loop = true;
         while (loop) {
             console.clear();
-            const options = {
+            await menuOptions({
                 "Buscar icono": async () => {
                     console.clear()
                     await Console.search();
-                    await new Promise(r => setTimeout(r, 1000));
+                    await new Promise(r => setTimeout(r, 3000));
                 },
-                "Extraer de archivo ts (withgoogle templates)": async () => {
-                    const file = await selectFile();
-                    if (!file) return;
-                    console.log("Archivo seleccionado:", file);
-                    await this.downloadIconToFile(file)
-                    await new Promise(r => setTimeout(r, 1000));
-                },
-                "Extraer de directorio (withgoogle templates)": async () => {
-                    const dir = await selectDirectory();
-                    if (!dir) return;
-                    console.log("Directorio seleccionado:", dir);
-                    await this.downloadIconToDir(dir)
-                    await new Promise(r => setTimeout(r, 1000));
-                },
-                "Implementar iconos (stitch with google templates)": async () => {
-                    await this.RemplaceToSvg()
-                    await new Promise(r => setTimeout(r, 1000));
-                },
+                "stitch google templates": async () => {await this.stitch_with_google_templates()},
                 "Mapear imágenes": async () => {await this.MapearImágenes();},
                 "Config": async () => {await this.Config()},
                 "separator_0": "",
                 "Salir": async () => { loop = false; },
                 "separator_1": "",
-            }
-            const { option } = await inquirer.prompt([
-                {
-                    type: "list",
-                    name: "option",
-                    message: "Selecciona una opción:",
-                    choices: Object.keys(options).map(e => e.includes('separator') ? new inquirer.Separator() : e)
-                }
-            ]);
-            await options[option]?.()
+            })
         }
     }
 
@@ -91,7 +78,7 @@ export default class Console {
     }
 
     private static async MapearImágenes() {
-        const options = {
+        await menuOptions({
             "for base": async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), null);
             },
@@ -101,21 +88,12 @@ export default class Console {
             "for lit": async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), "lit");
             },
-            "exit":()=>{},
-        }
-        const { option } = await inquirer.prompt([
-            {
-                type: "list",
-                name: "option",
-                message: "Selecciona una opción:",
-                choices: Object.keys(options).map(e => e.includes('separator') ? new inquirer.Separator() : e)
-            }
-        ]);
-        await options[option]?.()
+            "volver":()=>{},
+        })
     }
 
     private static async RemplaceToSvg(){
-        const options = {
+        await menuOptions({
             "file": async () => {
                 const file = await selectFile();
                 if (!file) return;
@@ -131,20 +109,11 @@ export default class Console {
                 }
             },
             "exit":()=>{},
-        }
-        const { option } = await inquirer.prompt([
-            {
-                type: "list",
-                name: "option",
-                message: "Selecciona una opción:",
-                choices: Object.keys(options).map(e => e.includes('separator') ? new inquirer.Separator() : e)
-            }
-        ]);
-        await options[option]?.()
+        })
     }
 
     private static async Config(){
-        const options = {
+        await menuOptions({
             "dir descargas": async () => {
                 const dir = await selectDirectory();
                 if (!dir) return;
@@ -174,19 +143,35 @@ export default class Console {
                 try { this.searchTime = parseInt(value); } catch (error) { }
             },
             "volver":async ()=>{},
-        }
-        const { option } = await inquirer.prompt([
-            {
-                type: "list",
-                name: "option",
-                message: "Selecciona una opción:",
-                choices: Object.keys(options).map(e => e.includes('separator') ? new inquirer.Separator() : e)
-            }
-        ]);
-        await options[option]?.()
+        })
     }
 
     private static async stitch_with_google_templates(){
-        
+        const extract = async()=>await menuOptions({
+            "Archivo": async () => {
+                const file = await selectFile();
+                if (!file) return;
+                console.log("Archivo seleccionado:", file);
+                await this.downloadIconToFile(file)
+                await new Promise(r => setTimeout(r, 1000));
+            },
+            "Recursivo": async () => {
+                const dir = await selectDirectory();
+                if (!dir) return;
+                console.log("Directorio seleccionado:", dir);
+                await this.downloadIconToDir(dir)
+                await new Promise(r => setTimeout(r, 1000));
+            },
+            "volver":async ()=>{},
+        })
+
+        await menuOptions({
+            "Extraer iconos": extract,
+            "Implementar iconos": async () => {
+                await this.RemplaceToSvg()
+                await new Promise(r => setTimeout(r, 1000));
+            },
+            "volver":async ()=>{},
+        })
     }
 }
