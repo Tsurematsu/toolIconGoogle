@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "strict": false,
+    "noEmitOnError": false,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "isolatedModules": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "target": "ESNext",
+    "module": "ESNext",           
+    "moduleResolution": "Bundler",       
+    "moduleDetection": "force",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+  }
+}
