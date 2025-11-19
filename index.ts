@@ -9,7 +9,5 @@ async function main() {
     
     await Console.menu();
     
-    // await Console.search();
-
     await GoogleFonts.close();
 }
