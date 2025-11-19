@@ -8,6 +8,8 @@ import { getSourceFiles } from "./getFiles";
 inquirer.registerPrompt("autocomplete", autocomplete);
 
 export default class Console {
+    private static iconTime = 600;
+    private static searchTime = 400;
     public static async menu() {
         let loop = true;
         while (loop) {
@@ -38,15 +40,38 @@ export default class Console {
                     console.log("Directorio seleccionado:", dir);
                     await GoogleFonts.setDirDownloads(dir)
                 },
-                "separator": "",
-                "Salir": async () => { loop = false; }
+                "Config time get icon": async () => {
+                    const { value } = await inquirer.prompt([
+                        {
+                            type: "input",
+                            name: "value",
+                            message: `[${this.iconTime}] Time get icon (ms)`,
+                            validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
+                        }
+                    ]);
+                    try {this.iconTime = parseInt(value);} catch (error) {}
+                },
+                "Config time search icons": async () => {
+                    const { value } = await inquirer.prompt([
+                        {
+                            type: "input",
+                            name: "value",
+                            message: `[${this.searchTime}] Time search (ms)`,
+                            validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
+                        }
+                    ]);
+                    try {this.searchTime = parseInt(value);} catch (error) {}
+                },
+                "separator_0": "",
+                "Salir": async () => { loop = false; },
+                "separator_1": "",
             }
             const { option } = await inquirer.prompt([
                 {
                     type: "list",
                     name: "option",
                     message: "Selecciona una opción:",
-                    choices: Object.keys(options).map(e => e == "separator" ? new inquirer.Separator() : e)
+                    choices: Object.keys(options).map(e => e.includes('separator') ? new inquirer.Separator() : e)
                 }
             ]);
             await options[option]?.()
@@ -54,8 +79,8 @@ export default class Console {
     }
 
     public static async search() {
-        async function buscar(texto) {
-            return await GoogleFonts.searchIcon(texto.toLowerCase())
+        const buscar = async (texto) => {
+            return await GoogleFonts.searchIcon(texto.toLowerCase(), this.searchTime)
         }
         const respuesta = await inquirer.prompt([
             {
@@ -66,19 +91,19 @@ export default class Console {
             }
         ]);
         console.log("Downloading... ", respuesta.icono);
-        const result = await GoogleFonts.getIcon(String(respuesta.icono))
+        const result = await GoogleFonts.getIcon(String(respuesta.icono), this.iconTime)
         console.log("Icon =>", result);
     }
 
-    private static async downloadIconToFile(file){
+    private static async downloadIconToFile(file) {
         const iconsFound = ExtractToFile(file);
         for (const element of iconsFound) {
-            const result = await GoogleFonts.getIcon(String(element))
+            const result = await GoogleFonts.getIcon(String(element), this.iconTime)
             console.log("Icon =>", result);
         }
     }
-    
-    private static async downloadIconToDir(dir){
+
+    private static async downloadIconToDir(dir) {
         const allFiles = await getSourceFiles(dir);
         for (const element of allFiles) {
             await this.downloadIconToFile(element);

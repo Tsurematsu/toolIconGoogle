@@ -42,14 +42,14 @@ export default class GoogleFonts{
         });
     }
 
-    public static async getIcon(iconName){
+    public static async getIcon(iconName, time = 600){
         this.iconSelected = iconName;
-        await this.page!.evaluate(getIconCallback, iconName)
+        await this.page!.evaluate(getIconCallback, iconName, time)
         return await new Promise(r=>this.resolveIcon=r);
     }
     
-    public static async searchIcon(iconName=""){
-        return await this.page!.evaluate(searchIconCallback, iconName)
+    public static async searchIcon(iconName="", time=400){
+        return await this.page!.evaluate(searchIconCallback, iconName, time)
     }
     
     public static async close(){
