@@ -32,7 +32,7 @@ function normalizeSvgFill(filePath: string): string | null {
     }
 
     return content;
-  } catch (err: any) {
+  } catch (err) {
     console.warn(`⚠️ Error procesando SVG: ${filePath}`, err.message);
     return null;
   }
@@ -112,7 +112,7 @@ function generateIndexForDir(dir: string, framework: Framework): void {
 
 // Helper para crear componentes SVG en React
 export function createSvgComponent(svgString: string) {
-  return function SvgComponent(props: any) {
+  return function SvgComponent(props) {
     return (
       <span
         {...props}
