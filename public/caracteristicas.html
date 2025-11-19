@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Material Symbols CLI - Features</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1A1A1A",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#191919",
+                    },
+                    fontFamily: {
+                        display: "Inter",
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light text-primary">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="sticky top-0 z-50 flex items-center justify-center whitespace-nowrap border-b border-solid border-black/10 bg-background-light/80 px-4 py-3 backdrop-blur-sm">
+                <div class="flex items-center justify-between w-full max-w-5xl">
+                    <div class="flex items-center gap-4 text-primary">
+                        <div class="size-4 text-primary">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd"
+                                    d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z"
+                                    fill="currentColor" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-primary text-lg font-bold leading-tight tracking-[-0.015em]">Material Symbols
+                            CLI</h2>
+                    </div>
+                    <div class="hidden md:flex flex-1 justify-end gap-8">
+                        <div class="flex items-center gap-9">
+                            <a class="text-primary/80 hover:text-primary text-sm font-medium leading-normal"
+                                href="#search">Interactive Search</a>
+                            <a class="text-primary/80 hover:text-primary text-sm font-medium leading-normal"
+                                href="#download">Automatic Download</a>
+                            <a class="text-primary/80 hover:text-primary text-sm font-medium leading-normal"
+                                href="#scan">Code Scanning</a>
+                            <a class="text-primary/80 hover:text-primary text-sm font-medium leading-normal"
+                                href="#map">Asset Mapping</a>
+                            <a class="text-primary/80 hover:text-primary text-sm font-medium leading-normal"
+                                href="#inject">Code Injection</a>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]">
+                            <span class="truncate">Get Started</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <main class="flex flex-1 justify-center py-5 px-4">
+                <div class="layout-content-container flex flex-col w-full max-w-5xl">
+                    <div class="flex flex-wrap justify-between gap-3 p-4 text-center my-12">
+                        <div class="flex w-full flex-col gap-3 items-center">
+                            <p class="text-primary text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">🚀
+                                Características Principales</p>
+                            <p class="text-primary/70 text-base md:text-lg font-normal leading-normal max-w-3xl">
+                                Discover the powerful features that make managing Google Material Symbols in your
+                                projects effortless and efficient. </p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-24">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center scroll-mt-24" id="search">
+                            <div class="flex flex-col gap-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-primary text-4xl">search</span>
+                                    <h2 class="text-primary text-3xl font-bold">Búsqueda Interactiva</h2>
+                                </div>
+                                <p class="text-primary/70 text-base leading-relaxed">Quickly find the perfect Material
+                                    Symbol directly from your terminal with an intuitive and interactive search
+                                    experience. No need to leave your workflow to browse a website; the icons you need
+                                    are just a command away.</p>
+                                <button
+                                    class="mt-4 flex w-fit cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-medium leading-normal tracking-[0.015em]">
+                                    <span class="truncate">Ver Documentación</span>
+                                </button>
+                            </div>
+                            <div
+                                class="flex items-center justify-center bg-black/5 rounded-xl p-4 border border-black/10">
+                                <img class="rounded-lg w-full"
+                                    data-alt="Animated GIF of the CLI tool showing an interactive search for an icon."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuX9BBNuY6Hz0CPkJospvCQqCEw8FUSEc5EVWCfsxf0tsKDnmffGQqkKbdgwMdaxiKPuUUN3rGvduihZy-wjEMXbgMBhRY7rAohLDs4VDruh2wtP0FfYs2qX9aX4tVPDImXt7TIgGL0x0UD-3LDT2oNU2y6F3MxY5tZYjftL5xpsGOtp-xrI8bMBe_1Gq7ag2aiMiOJ87cEnxvbQRfUHSOn_u5ethy_S2iW-pnWa-ceawQPPKg7JrOZbN_HB9dDM7ovUvHP3xoTGU" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center scroll-mt-24" id="download">
+                            <div
+                                class="flex items-center justify-center bg-black/5 rounded-xl p-4 border border-black/10 md:order-1">
+                                <img class="rounded-lg w-full"
+                                    data-alt="Diagram showing the flow from CLI, to Google Servers, to the user's project folder."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN45giszxh3S7wKND5CwY_NzNCi5DSQTmPiEoUJZac1YzVb19Jq_SE3yGjlhSfGaS3PoaHcm35NcXSaEuqyCyH8bPcA2cxFcyrVxY0FT5CQy4VHnLqYOvc9vhWXPd3E6aW-MaB3UC_WTtQNr42cEF_5QXELP0O_TZxZfaiXttBP7fF3rhoAAuwQ9agxpW-DuNsA812olVF2AFLgkjc4u916i24PISLsSdyfXNlgQ1Vfdc4gspdQu-q12odM6MeZ7X96-DPpDRfeTA" />
+                            </div>
+                            <div class="flex flex-col gap-4 md:order-2">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-primary text-4xl">download</span>
+                                    <h2 class="text-primary text-3xl font-bold">Descarga Automática</h2>
+                                </div>
+                                <p class="text-primary/70 text-base leading-relaxed">Automatically fetch and save
+                                    selected symbol assets (SVG, PNG) directly into your project's directory. Configure
+                                    your preferred format and path once, and let the tool handle the rest, ensuring
+                                    consistency across your project.</p>
+                                <button
+                                    class="mt-4 flex w-fit cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-medium leading-normal tracking-[0.015em]">
+                                    <span class="truncate">Ver Documentación</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center scroll-mt-24" id="scan">
+                            <div class="flex flex-col gap-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-primary text-4xl">code_blocks</span>
+                                    <h2 class="text-primary text-3xl font-bold">Escaneo de Código</h2>
+                                </div>
+                                <p class="text-primary/70 text-base leading-relaxed">Let the tool scan your source code
+                                    to automatically detect which symbols are being used, ensuring you only bundle what
+                                    you need. This keeps your project lightweight and optimized by avoiding unused
+                                    assets.</p>
+                                <button
+                                    class="mt-4 flex w-fit cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-medium leading-normal tracking-[0.015em]">
+                                    <span class="truncate">Ver Documentación</span>
+                                </button>
+                            </div>
+                            <div
+                                class="flex items-center justify-center bg-black/5 rounded-xl p-4 border border-black/10">
+                                <img class="rounded-lg w-full"
+                                    data-alt="A code snippet with symbol names like 'search' highlighted to demonstrate the scanning feature."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAySnsetR64UbhaBqlx8dB_-alyY6U--VKyxG6ZhoZmeuh51byjW9UFd-qOXQDipS9yXla4GL-cki8EwrBEVjlQWxx_LGemS_M2BLrv0NJA_WRfPKNmskg5_V4VRqBS1mgZV2wU1xPp1Bxpg_5aPCdHS9mQB1-8LyLz1cvcvL0VJBjo_kJgXz8aIYnuT5cytT4ibQIfTENewUK9P1qK70ldgtlloaVNV_o4HN64Owxzx5pIhQjkDvBjPOqJgSZ4SI8XM-JQrxjhISY" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center scroll-mt-24" id="map">
+                            <div
+                                class="flex items-center justify-center bg-black/5 rounded-xl p-4 border border-black/10 md:order-1">
+                                <img class="rounded-lg w-full"
+                                    data-alt="A simplified visual representation of a JSON file mapping icon names to their file paths."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbZk-ZOAMu0MhH1-EKdFp4ENmH2BbmGXhT3F7LtGWS_wS9DIvg-he_BezTLLpR7g-Z9q8h4VYnXJuz0gq-00RF1kJvpnHeLmGXA1jh3EpZBzjs_KIOybJQCJX7nwJLDokSWlFY9JXv3AFZWOePS0xjecR7R2TBs2fJ0PjnU0cMWcCmGrDPf03w7LTG1_Hfo0zXLCCU_Ontc9GV31cIwLl-P3pr6dnswdNdwtq8wYCFr86Jx8UlAz1Ehm6Zg4InIc3a6gm2kVEXnJg" />
+                            </div>
+                            <div class="flex flex-col gap-4 md:order-2">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-primary text-4xl">folder_shared</span>
+                                    <h2 class="text-primary text-3xl font-bold">Mapeo de Activos</h2>
+                                </div>
+                                <p class="text-primary/70 text-base leading-relaxed">Generate a clear map, like a JSON
+                                    file, of used symbols to their corresponding asset files for easy reference and
+                                    management. This is perfect for building dynamic icon components or for use with
+                                    bundlers.</p>
+                                <button
+                                    class="mt-4 flex w-fit cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-medium leading-normal tracking-[0.015em]">
+                                    <span class="truncate">Ver Documentación</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center scroll-mt-24" id="inject">
+                            <div class="flex flex-col gap-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-primary text-4xl">syringe</span>
+                                    <h2 class="text-primary text-3xl font-bold">Inyección de Código</h2>
+                                </div>
+                                <p class="text-primary/70 text-base leading-relaxed">Automatically inject the necessary
+                                    SVG code or font links into your HTML or component files, saving you manual effort.
+                                    Streamline your build process by letting the CLI handle the boilerplate for you.</p>
+                                <button
+                                    class="mt-4 flex w-fit cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-medium leading-normal tracking-[0.015em]">
+                                    <span class="truncate">Ver Documentación</span>
+                                </button>
+                            </div>
+                            <div
+                                class="flex items-center justify-center bg-black/5 rounded-xl p-4 border border-black/10">
+                                <img class="rounded-lg w-full"
+                                    data-alt="A before-and-after representation of an HTML file, showing code being automatically injected."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPvt86pABfQvxovyeP4CXRSKm9cUX9bk21qL6kpwfnZo4tjBW_vf4Vjzj5914cC75VBIOVl9775Gcr0YgK-JPFha1fhCm9ZD-8r0gbru-wGncDJirW-mfjucuxa2IWdcetetsgxs1IhS8GOhsrdi8U9fPYUGaY8BMFKQLEGI0n9cN3PBsvyg1KcEfUqF953cjnPjKuHU3-jXtXx5Rgv_wyA-lbQQSaSQhIuOhT8hhaNrRSu1uDpt_fmPRk_XkHgdvApDgAB1f1sWk" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="@container my-24">
+                        <div
+                            class="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20 text-center">
+                            <div class="flex flex-col items-center gap-2">
+                                <h1
+                                    class="text-primary tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-2xl">
+                                    Ready to Supercharge Your Workflow? </h1>
+                                <p class="text-primary/70 text-base font-normal leading-normal max-w-2xl">Download the
+                                    CLI tool and start managing your Material Symbols with ease. Star the project on
+                                    GitHub to stay up to date.</p>
+                            </div>
+                            <div class="flex flex-1 justify-center">
+                                <div class="flex justify-center">
+                                    <button
+                                        class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] grow">
+                                        <span class="truncate">View on GitHub</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="flex flex-col gap-6 px-5 py-10 text-center @container border-t border-black/10">
+                <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
+                    <a class="text-primary/70 hover:text-primary text-base font-normal leading-normal min-w-40"
+                        href="#">Documentation</a>
+                    <a class="text-primary/70 hover:text-primary text-base font-normal leading-normal min-w-40"
+                        href="#">Contact</a>
+                    <a class="text-primary/70 hover:text-primary text-base font-normal leading-normal min-w-40"
+                        href="#">Privacy Policy</a>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#">
+                        <svg class="text-primary/70 hover:text-primary" fill="currentColor" height="24"
+                            viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg class="text-primary/70 hover:text-primary" fill="currentColor" height="24"
+                            viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 5.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-primary/70 text-sm font-normal leading-normal">© 2024 Material Symbols CLI. All rights
+                    reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+</html>

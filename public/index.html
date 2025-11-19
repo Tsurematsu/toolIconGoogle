@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html class="" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Material Symbols CLI - The Ultimate CLI for Google Material Symbols</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <!-- TopNavBar -->
+                    <header
+                        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200/10 dark:border-white/10 px-4 sm:px-10 py-3 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm z-50">
+                        <div class="flex items-center gap-4 text-black dark:text-white">
+                            <div class="text-primary text-2xl flex items-center">
+                                <span class="material-symbols-outlined">auto_awesome</span>
+                            </div>
+                            <h2 class="text-black dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+                                Material Symbols CLI</h2>
+                        </div>
+                        <div class="hidden sm:flex flex-1 justify-end gap-8">
+                            <div class="flex items-center gap-9">
+                                <a class="text-black dark:text-white text-sm font-medium leading-normal hover:text-primary"
+                                    href="#">Docs</a>
+                                <a class="text-black dark:text-white text-sm font-medium leading-normal hover:text-primary"
+                                    href="#">GitHub</a>
+                            </div>
+                            <button
+                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+                                <span class="truncate">Get Started</span>
+                            </button>
+                        </div>
+                    </header>
+                    <main class="flex flex-col gap-12 md:gap-20">
+                        <!-- HeroSection -->
+                        <div class="@container mt-10 sm:mt-20">
+                            <div class="flex flex-col gap-6 px-4 py-10 text-center items-center">
+                                <div class="flex flex-col gap-6 @[864px]:justify-center">
+                                    <div class="flex flex-col gap-3">
+                                        <h1
+                                            class="text-black dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-6xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-3xl">
+                                            The Ultimate CLI for Google Material Symbols
+                                        </h1>
+                                        <h2
+                                            class="text-gray-600 dark:text-gray-300 text-base font-normal leading-normal @[480px]:text-xl @[480px]:font-normal @[480px]:leading-normal max-w-2xl mx-auto">
+                                            Effortlessly download, optimize, and manage the entire Material Symbols
+                                            library for your projects.
+                                        </h2>
+                                    </div>
+                                    <div class="flex justify-center items-center gap-4 mt-4">
+                                        <button
+                                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+                                            <span class="truncate">Get Started</span>
+                                        </button>
+                                        <a class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gray-200/80 dark:bg-white/10 text-black dark:text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-gray-200 dark:hover:bg-white/20 transition-colors"
+                                            href="#">
+                                            <span class="truncate">View on GitHub</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Easy to use Section with ListItem -->
+                        <div class="px-4">
+                            <h3
+                                class="text-black dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-4 text-center">
+                                Easy to use</h3>
+                            <div
+                                class="flex items-center gap-4 bg-gray-100 dark:bg-white/5 px-4 min-h-14 justify-between rounded-lg border border-gray-200/80 dark:border-white/10">
+                                <div class="flex items-center gap-4 w-full">
+                                    <div class="text-primary flex items-center justify-center shrink-0 size-10">
+                                        <span class="material-symbols-outlined">terminal</span>
+                                    </div>
+                                    <p
+                                        class="text-gray-700 dark:text-gray-300 text-sm md:text-base font-mono leading-normal flex-1 truncate">
+                                        npx get-material-symbols &lt;options&gt;</p>
+                                </div>
+                                <div class="shrink-0">
+                                    <button aria-label="Copy to clipboard"
+                                        class="text-gray-500 dark:text-gray-400 flex size-7 items-center justify-center hover:text-primary dark:hover:text-primary">
+                                        <span class="material-symbols-outlined">content_copy</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FeatureSection -->
+                        <div class="flex flex-col gap-10 px-4 py-10 @container">
+                            <div class="flex flex-col gap-4 text-center items-center">
+                                <h1
+                                    class="text-black dark:text-white tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">
+                                    Streamline Your Icon Workflow
+                                </h1>
+                                <p
+                                    class="text-gray-600 dark:text-gray-400 text-base font-normal leading-normal max-w-[720px]">
+                                    Our CLI tool is packed with features to make managing icons a breeze, from automated
+                                    updates to deep customization.
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-0">
+                                <div
+                                    class="flex flex-1 gap-4 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-5 flex-col">
+                                    <div class="text-primary text-3xl">
+                                        <span class="material-symbols-outlined">cloud_sync</span>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <h2 class="text-black dark:text-white text-base font-bold leading-tight">Always
+                                            Up-to-Date</h2>
+                                        <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal">
+                                            Automatically syncs with the latest Google Material Symbols library.</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex flex-1 gap-4 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-5 flex-col">
+                                    <div class="text-primary text-3xl">
+                                        <span class="material-symbols-outlined">tune</span>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <h2 class="text-black dark:text-white text-base font-bold leading-tight">Fully
+                                            Customizable</h2>
+                                        <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal">
+                                            Configure fill, weight, grade, and optical size to match your design system.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex flex-1 gap-4 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 p-5 flex-col">
+                                    <div class="text-primary text-3xl">
+                                        <span class="material-symbols-outlined">code</span>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <h2 class="text-black dark:text-white text-base font-bold leading-tight">
+                                            Framework Agnostic</h2>
+                                        <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal">
+                                            Works seamlessly with any web framework or project setup.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Secondary CTA -->
+                        <div class="px-4 py-10">
+                            <div
+                                class="bg-primary/10 dark:bg-primary/20 rounded-xl p-8 md:p-12 text-center flex flex-col items-center gap-6">
+                                <h2 class="text-2xl md:text-3xl font-bold text-black dark:text-white max-w-xl">Ready to
+                                    streamline your icon workflow?</h2>
+                                <p class="text-gray-700 dark:text-gray-300 max-w-xl">Dive into the documentation to
+                                    explore all the features and get started in minutes.</p>
+                                <button
+                                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+                                    <span class="truncate">Read The Docs</span>
+                                </button>
+                            </div>
+                        </div>
+                    </main>
+                    <!-- Footer -->
+                    <footer class="mt-20 py-8 px-4 border-t border-gray-200/10 dark:border-white/10">
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <div class="flex items-center gap-2">
+                                <div class="text-primary text-lg">
+                                    <span class="material-symbols-outlined">auto_awesome</span>
+                                </div>
+                                <span class="text-gray-500 dark:text-gray-400 text-sm">Material Symbols CLI</span>
+                            </div>
+                            <div class="text-gray-500 dark:text-gray-400 text-sm">
+                                <span>© 2024. Released under the MIT License.</span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

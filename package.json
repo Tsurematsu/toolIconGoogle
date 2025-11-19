@@ -1,31 +1,38 @@
 {
   "name": "toolicongoogle",
   "version": "1.0.0",
-  "description": "",
+  "description": "Herramienta CLI para automatizar la gestión de iconos de Google Fonts.",
   "main": "index.ts",
   "scripts": {
     "dev": "tsx ./index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "cli",
+    "icons",
+    "google-fonts",
+    "automation",
+    "react",
+    "lit"
+  ],
+  "author": "Jose Daniel Solano Garcia",
+  "license": "CC-BY-NC-4.0",
   "type": "commonjs",
   "dependencies": {
     "@types/express": "^5.0.5",
     "@types/node": "^24.10.0",
-    "express": "^5.1.0",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.20.6",
-    "typescript": "^5.9.3",
     "clipboard-sys": "^1.2.1",
     "clipboardy": "^5.0.0",
     "copy-paste": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+    "express": "^5.1.0",
     "inquirer": "^9.3.8",
     "inquirer-autocomplete-prompt": "^3.0.1",
     "puppeteer": "^24.30.0",
     "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2"
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   }
 }
