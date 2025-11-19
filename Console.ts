@@ -4,6 +4,7 @@ import GoogleFonts from "./GoogleFonts";
 import { selectDirectory } from "./selectDirectory";
 import { selectFile } from "./selectFile";
 import ExtractToFile from "./ExtractToFile";
+import { getSourceFiles } from "./getFiles";
 inquirer.registerPrompt("autocomplete", autocomplete);
 
 export default class Console {
@@ -15,34 +16,27 @@ export default class Console {
                 "Buscar icono": async () => {
                     console.clear()
                     await Console.search();
+                    await new Promise(r => setTimeout(r, 1000));
                 },
                 "Extraer de archivo": async () => {
                     const file = await selectFile();
-                    if (file) {
-                        console.log("Archivo seleccionado:", file);
-                        await this.downloadIconToFile(file)
-                    } else {
-                        console.log("Cancelado.");
-                    }
+                    if (!file) return;
+                    console.log("Archivo seleccionado:", file);
+                    await this.downloadIconToFile(file)
+                    await new Promise(r => setTimeout(r, 1000));
                 },
                 "Extraer de directorio": async () => {
                     const dir = await selectDirectory();
-
-                    if (dir) {
-                        console.log("Directorio seleccionado:", dir);
-                    } else {
-                        console.log("Cancelado.");
-                    }
+                    if (!dir) return;
+                    console.log("Directorio seleccionado:", dir);
+                    await this.downloadIconToDir(dir)
+                    await new Promise(r => setTimeout(r, 1000));
                 },
                 "Config dir descargas": async () => {
                     const dir = await selectDirectory();
-
-                    if (dir) {
-                        console.log("Directorio seleccionado:", dir);
-                        GoogleFonts.setDirDownloads(dir)
-                    } else {
-                        console.log("Cancelado.");
-                    }
+                    if (!dir) return;
+                    console.log("Directorio seleccionado:", dir);
+                    await GoogleFonts.setDirDownloads(dir)
                 },
                 "separator": "",
                 "Salir": async () => { loop = false; }
@@ -74,7 +68,6 @@ export default class Console {
         console.log("Downloading... ", respuesta.icono);
         const result = await GoogleFonts.getIcon(String(respuesta.icono))
         console.log("Icon =>", result);
-        await new Promise(r => setTimeout(r, 1000));
     }
 
     private static async downloadIconToFile(file){
@@ -83,6 +76,12 @@ export default class Console {
             const result = await GoogleFonts.getIcon(String(element))
             console.log("Icon =>", result);
         }
-        await new Promise(r => setTimeout(r, 1000));
+    }
+    
+    private static async downloadIconToDir(dir){
+        const allFiles = await getSourceFiles(dir);
+        for (const element of allFiles) {
+            await this.downloadIconToFile(element);
+        }
     }
 }
