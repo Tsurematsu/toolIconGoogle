@@ -7,9 +7,9 @@ main();
 async function main() {
     await GoogleFonts.init();
     
-    // await Console.menu();
+    await Console.menu();
     
-    await Console.search();
+    // await Console.search();
 
     await GoogleFonts.close();
 }
