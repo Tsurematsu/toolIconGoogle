@@ -50,16 +50,16 @@ window.simulateTyping = async (selector, text) => {
 
 window.getIcon = async (iconName)=>{
     await window.simulateTyping("#mat-input-0", iconName);
-    await new Promise(r=>setTimeout(r, 500))
+    await new Promise(r=>setTimeout(r, 600))
     document.querySelector('button[icon-item][aria-label]').click()
-    await new Promise(r=>setTimeout(r, 500))
+    await new Promise(r=>setTimeout(r, 600))
     document.querySelector('button[aria-label="Download asset in SVG format for this icon"]').click();
 }
 
 window.searchIcon = async (iconName="")=>{
     if (iconName.length>0) {
         await window.simulateTyping("#mat-input-0", iconName);
-        await new Promise(r=>setTimeout(r, 300))
+        await new Promise(r=>setTimeout(r, 400))
     }
     const results = []
     document.querySelectorAll('button[icon-item][aria-label]').forEach(element => {
