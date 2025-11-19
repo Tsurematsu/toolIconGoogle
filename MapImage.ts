@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 
-export type Framework = "react" | "lit";
+// Ahora aceptamos null como opción válida
+export type Framework = "react" | "lit" | null;
 
 /** 
  * Convierte nombres de archivo a formato camelCase 
@@ -76,7 +77,7 @@ function generateIndexForDir(dir: string, framework: Framework): void {
             .replace(/`/g, '\\`')
             .replace(/\$/g, '\\$');
 
-          // Guardamos el string crudo en una constante local para no ensuciar el objeto
+          // Guardamos el string crudo en una constante local
           const rawVarName = `${camelName}_raw`;
           importLines.push(`const ${rawVarName} = \`${escapedContent}\`;`);
 
@@ -84,9 +85,12 @@ function generateIndexForDir(dir: string, framework: Framework): void {
           if (framework === "react") {
              // React: usa la función helper createSvgComponent
              objectEntries.push(`  ${camelName}: createSvgComponent(${rawVarName}),`);
-          } else {
+          } else if (framework === "lit") {
              // Lit: usa una arrow function con unsafeHTML
              objectEntries.push(`  ${camelName}: () => unsafeHTML(${rawVarName}),`);
+          } else {
+             // Null (Sin framework): asignación directa del string
+             objectEntries.push(`  ${camelName}: ${rawVarName},`);
           }
         }
       } else if (imageExtensions.includes(ext)) {
@@ -98,12 +102,12 @@ function generateIndexForDir(dir: string, framework: Framework): void {
     }
   }
 
-  // Definir cabeceras y helpers según framework
+  // Definir cabeceras y nombre de archivo según framework
   let header = "";
   let outputFileName = "index.ts";
 
   if (framework === "react") {
-    outputFileName = "index.tsx"; // Usamos tsx porque incluye JSX
+    outputFileName = "index.tsx"; // .tsx solo para React
     header = `import React from 'react';
 
 // Helper para crear componentes SVG en React
@@ -117,22 +121,25 @@ export function createSvgComponent(svgString: string) {
     );
   };
 }`;
-  } else {
-    // Lit
+  } else if (framework === "lit") {
+    outputFileName = "index.ts";
     header = `import { unsafeHTML } from 'lit/directives/unsafe-html.js';`;
+  } else {
+    // Caso Null: Sin cabeceras especiales y archivo .ts estándar
+    outputFileName = "index.ts";
+    header = "";
   }
 
   // Construir el contenido final del archivo
-  const content = `${header}
-
-${importLines.join("\n")}
+  // Si header está vacío, trim() evita una línea en blanco innecesaria al principio
+  const content = `${header ? header + "\n\n" : ""}${importLines.join("\n")}
 
 export default {
 ${objectEntries.join("\n")}
 };
 `;
 
-  // Escribir el archivo (index.ts o index.tsx)
+  // Escribir el archivo
   fs.writeFileSync(path.join(dir, outputFileName), content);
 }
 
@@ -140,7 +147,7 @@ ${objectEntries.join("\n")}
  * Función principal exportada por defecto.
  * Recibe una ruta absoluta y genera índices recursivos para assets.
  * @param rootFolder Ruta absoluta del directorio a procesar.
- * @param framework El framework destino ('react' | 'lit').
+ * @param framework El framework destino ('react' | 'lit' | null).
  */
 export default function MapImage(rootFolder: string, framework: Framework): void {
   if (!fs.existsSync(rootFolder)) {

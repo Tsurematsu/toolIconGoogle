@@ -35,12 +35,8 @@ export default class Console {
                     await this.downloadIconToDir(dir)
                     await new Promise(r => setTimeout(r, 1000));
                 },
-                "Mapear imágenes de directorio (react)": async () => {
-                    await MapImage(GoogleFonts.getDownloadPath(), "react");
-                    await new Promise(r => setTimeout(r, 1000));
-                },
-                "Mapear imágenes de directorio (lit)": async () => {
-                    await MapImage(GoogleFonts.getDownloadPath(), "lit");
+                "Mapear imágenes": async () => {
+                    await this.MapearImágenes();
                     await new Promise(r => setTimeout(r, 1000));
                 },
                 "Config dir descargas": async () => {
@@ -58,7 +54,7 @@ export default class Console {
                             validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
                         }
                     ]);
-                    try {this.iconTime = parseInt(value);} catch (error) {}
+                    try { this.iconTime = parseInt(value); } catch (error) { }
                 },
                 "Config time search icons": async () => {
                     const { value } = await inquirer.prompt([
@@ -69,7 +65,7 @@ export default class Console {
                             validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
                         }
                     ]);
-                    try {this.searchTime = parseInt(value);} catch (error) {}
+                    try { this.searchTime = parseInt(value); } catch (error) { }
                 },
                 "separator_0": "",
                 "Salir": async () => { loop = false; },
@@ -117,5 +113,29 @@ export default class Console {
         for (const element of allFiles) {
             await this.downloadIconToFile(element);
         }
+    }
+
+    private static async MapearImágenes() {
+        const options = {
+            "for base": async () => {
+                await MapImage(GoogleFonts.getDownloadPath(), null);
+            },
+            "for react": async () => {
+                await MapImage(GoogleFonts.getDownloadPath(), "react");
+            },
+            "for lit": async () => {
+                await MapImage(GoogleFonts.getDownloadPath(), "lit");
+            },
+            "exit":()=>{},
+        }
+        const { option } = await inquirer.prompt([
+            {
+                type: "list",
+                name: "option",
+                message: "Selecciona una opción:",
+                choices: Object.keys(options).map(e => e.includes('separator') ? new inquirer.Separator() : e)
+            }
+        ]);
+        await options[option]?.()
     }
 }
