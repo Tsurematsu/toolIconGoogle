@@ -64,8 +64,11 @@ export default class GoogleFonts{
     }
     
     public static async close(){
-        await this.page.close();
-        await this.browser.close()
+        try {
+            await this.page.close();
+            await this.browser.close()
+        } catch (error) {
+        }
     }
 
     public static async init(){
