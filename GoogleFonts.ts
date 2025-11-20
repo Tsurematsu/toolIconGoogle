@@ -19,19 +19,27 @@ export default class GoogleFonts{
     }
     public static async setDirDownloads(newPath){
         this.downloadPath = newPath
-        await this.client.send('Browser.setDownloadBehavior', {
-            behavior: 'allow',
-            downloadPath: this.downloadPath,
-            eventsEnabled: true
-        });
+        try {
+            await this.client.send('Browser.setDownloadBehavior', {
+                behavior: 'allow',
+                downloadPath: this.downloadPath,
+                eventsEnabled: true
+            });
+        } catch (error) {
+            
+        }
     }
     private static async downloadManager(){
         this.client = await this.page.createCDPSession();
-        await this.client.send('Browser.setDownloadBehavior', {
-            behavior: 'allow',
-            downloadPath: this.downloadPath,
-            eventsEnabled: true
-        });
+        try {
+            await this.client.send('Browser.setDownloadBehavior', {
+                behavior: 'allow',
+                downloadPath: this.downloadPath,
+                eventsEnabled: true
+            });
+        } catch (error) {
+            
+        }
         this.client.on('Browser.downloadWillBegin', (event) => {this.cacheNameFile = event.suggestedFilename;});
         this.client.on('Browser.downloadProgress', (event) => {
             if (event.state === 'completed') {
