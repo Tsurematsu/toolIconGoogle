@@ -96,7 +96,7 @@ export async function generateImageMap(baseDir: string, outputFilename: string):
   try {
     const publicDir = path.join(baseDir, 'public');
     const assetsDir = path.join(baseDir, 'src', 'assets');
-    const outputFile = path.join(assetsDir, `${outputFilename}.ts`);
+    const outputFile = path.join(assetsDir, `${outputFilename}.js`);
 
     // Validar existencia de public
     try {
