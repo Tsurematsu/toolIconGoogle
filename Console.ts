@@ -7,6 +7,9 @@ import ExtractToFile from "./ExtractToFile";
 import { getSourceFiles } from "./getFiles";
 import MapImage from "./MapImage";
 import InjectIcons from "./InjectIcons";
+import { generateImageMap } from "./image-mapper";
+import path from "path";
+import fs from "fs";
 inquirer.registerPrompt("autocomplete", autocomplete);
 
 async function menuOptions(options : Record<string, any>, print = "Selecciona una opción:"){
@@ -26,12 +29,20 @@ export default class Console {
     private static iconTime = 300;
     private static searchTime = 400;
     public static async menu() {
+        try {
+            const rutaBase = path.resolve(process.cwd(), "src", "assets")
+            await fs.accessSync(rutaBase)
+            await GoogleFonts.setDirDownloads(rutaBase)
+        } catch (error) {
+            await GoogleFonts.setDirDownloads(process.cwd())
+        }
         let loop = true;
         while (loop) {
             console.clear();
             await menuOptions({
                 "Buscar icono": async () => {
                     console.clear()
+                    await GoogleFonts.init();
                     await Console.search();
                     await new Promise(r => setTimeout(r, 3000));
                 },
@@ -43,6 +54,7 @@ export default class Console {
                 "separator_1": "",
             })
         }
+        await GoogleFonts.close();
     }
 
     public static async search() {
@@ -84,6 +96,18 @@ export default class Console {
             },
             "for react": async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), "react");
+            },
+            "for static (vite)": async () => {
+                const { value } = await inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "value",
+                        message: `Nombre modulo`,
+                        validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
+                    }
+                ]);
+                const basePath = process.cwd()
+                await generateImageMap(basePath, value);
             },
             "for lit": async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), "lit");
@@ -147,6 +171,8 @@ export default class Console {
     }
 
     private static async stitch_with_google_templates(){
+        await GoogleFonts.init();
+
         const extract = async()=>await menuOptions({
             "Archivo": async () => {
                 const file = await selectFile();

@@ -6,9 +6,9 @@ import Console from './Console';
 main();
 
 async function main() {
-    await GoogleFonts.init();
+    
     
     await Console.menu();
     
-    await GoogleFonts.close();
+    
 }

@@ -4,6 +4,8 @@ Esta herramienta de línea de comandos (CLI) está diseñada para automatizar el
 
 Permite buscar, descargar, mapear y reemplazar automáticamente referencias de iconos en tu código fuente, transformando etiquetas `<span>` estáticas en componentes o variables importadas de forma segura.
 
+
+
 ## 🚀 Características Principales
 
 *   🔍 **Búsqueda Interactiva:** Autocompletado para buscar iconos en la librería de Google.
@@ -13,6 +15,18 @@ Permite buscar, descargar, mapear y reemplazar automáticamente referencias de i
 *   💉 **Inyección de Código:** Reemplaza automáticamente los `<span>` de tus archivos por componentes React o directivas Lit.
 
 ---
+
+## ¿Como usarlo?
+
+# Primero instalar
+```hs
+    npm install -g toolicongoogle
+```
+
+# En la consola de tu espacio de trabajo ejecutas
+```hs
+    fontsgo
+```
 
 ## 📖 Guía de Opciones del Menú
 
@@ -101,3 +115,6 @@ Para sacar el máximo provecho a la herramienta, sigue este orden:
 *   La herramienta ignora automáticamente la carpeta `node_modules` durante los escaneos recursivos.
 *   Asegúrate de ejecutar `Mapear imágenes` antes de `Implementar iconos`, ya que la inyección depende de que exista el objeto `assets` generado.
 *   La inyección de iconos verifica si el archivo es `.ts` (Lit) o `.tsx` (React) para aplicar la sintaxis correcta.
+
+# Reconocimentos 
+- Kaitovd [https://github.com/Kaitovid] "gracias por probar la herramienta"

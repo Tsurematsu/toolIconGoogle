@@ -61,6 +61,7 @@ export default class GoogleFonts{
     }
 
     public static async init(){
+        if (this.browser != null) return;
         if (!fs.existsSync(this.downloadPath)) fs.mkdirSync(this.downloadPath, { recursive: true });
         this.browser = await puppeteer.launch({
             headless: true,
