@@ -43,6 +43,7 @@ export default class Console {
                 "Buscar icono": async () => {
                     console.clear()
                     await GoogleFonts.init();
+                    await new Promise(r => setTimeout(r, 3000));
                     await Console.search();
                     await new Promise(r => setTimeout(r, 3000));
                 },
@@ -172,7 +173,7 @@ export default class Console {
 
     private static async stitch_with_google_templates(){
         await GoogleFonts.init();
-
+        await new Promise(r => setTimeout(r, 3000));
         const extract = async()=>await menuOptions({
             "Archivo": async () => {
                 const file = await selectFile();
