@@ -15,8 +15,8 @@
   ],
 "scripts": {
   "dev": "tsx ./index.ts",
-    "build": "tsc && node fix-imports.js",  
-    "prepublishOnly": "npm run build"
+  "build": "tsc && node fix-imports.js",  
+  "prepublishOnly": "npm run build"
   },
   "keywords": [
     "cli",
