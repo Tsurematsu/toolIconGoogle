@@ -117,4 +117,4 @@ Para sacar el máximo provecho a la herramienta, sigue este orden:
 *   La inyección de iconos verifica si el archivo es `.ts` (Lit) o `.tsx` (React) para aplicar la sintaxis correcta.
 
 # Reconocimentos 
-- Kaitovd [https://github.com/Kaitovid] "gracias por probar la herramienta"
+- Kaitovid [https://github.com/Kaitovid] "gracias por probar la herramienta"

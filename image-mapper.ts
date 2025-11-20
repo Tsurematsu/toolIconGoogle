@@ -114,9 +114,8 @@ export async function generateImageMap(baseDir: string, outputFilename: string):
 // ⚠️ ARCHIVO GENERADO AUTOMÁTICAMENTE
 // Las rutas son absolutas respecto al servidor (comienzan con /)
 
-export const images = ${JSON.stringify(imageTree, null, 2)} as const;
-
-export type ImageMap = typeof images;
+const ${outputFilename} = ${JSON.stringify(imageTree, null, 2)};
+export default ${outputFilename}
 `;
 
     await fs.mkdir(assetsDir, { recursive: true });
