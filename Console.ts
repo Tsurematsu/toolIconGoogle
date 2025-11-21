@@ -98,7 +98,7 @@ export default class Console {
             "for react": async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), "react");
             },
-            "for static (vite)": async () => {
+            "for static (vite ts)": async () => {
                 const { value } = await inquirer.prompt([
                     {
                         type: "input",
@@ -109,6 +109,18 @@ export default class Console {
                 ]);
                 const basePath = process.cwd()
                 await generateImageMap(basePath, value);
+            },
+             "for static (vite js)": async () => {
+                const { value } = await inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "value",
+                        message: `Nombre modulo`,
+                        validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
+                    }
+                ]);
+                const basePath = process.cwd()
+                await generateImageMap(basePath, value, 'js');
             },
             "for lit": async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), "lit");

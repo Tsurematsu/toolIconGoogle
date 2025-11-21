@@ -92,11 +92,11 @@ async function scanDirectory(currentDir: string, rootPublicDir: string): Promise
 // FUNCIÓN PRINCIPAL
 // ----------------------------------------------------------------------
 
-export async function generateImageMap(baseDir: string, outputFilename: string): Promise<void> {
+export async function generateImageMap(baseDir: string, outputFilename: string, extencion = "ts"): Promise<void> {
   try {
     const publicDir = path.join(baseDir, 'public');
     const assetsDir = path.join(baseDir, 'src', 'assets');
-    const outputFile = path.join(assetsDir, `${outputFilename}.js`);
+    const outputFile = path.join(assetsDir, `${outputFilename}.${extencion}`);
 
     // Validar existencia de public
     try {

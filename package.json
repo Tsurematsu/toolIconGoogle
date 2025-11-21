@@ -1,6 +1,6 @@
 {
   "name": "toolicongoogle",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Herramienta CLI para automatizar la gestión de iconos de Google Fonts.",
   "main": "./dist/index.js", 
   "type": "module", 
