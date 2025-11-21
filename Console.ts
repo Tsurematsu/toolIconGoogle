@@ -10,6 +10,7 @@ import InjectIcons from "./InjectIcons";
 import { generateImageMap } from "./image-mapper";
 import path from "path";
 import fs from "fs";
+import { getSystemLanguage, TextOptionsEnglish, TextOptionsSpanish } from "./TextOptions";
 inquirer.registerPrompt("autocomplete", autocomplete);
 
 async function menuOptions(options : Record<string, any>, print = "Selecciona una opción:"){
@@ -28,7 +29,15 @@ async function menuOptions(options : Record<string, any>, print = "Selecciona un
 export default class Console {
     private static iconTime = 300;
     private static searchTime = 400;
+    private static keyWordsOptions = null;
     public static async menu() {
+        const lang = getSystemLanguage();
+        const arrOptions = {
+            "es":TextOptionsSpanish,
+            "en":TextOptionsEnglish,
+        }
+        this.keyWordsOptions =  arrOptions[lang];
+        
         try {
             const rutaBase = path.resolve(process.cwd(), "src", "assets")
             await fs.accessSync(rutaBase)
@@ -46,11 +55,11 @@ export default class Console {
                     await Console.search();
                     await new Promise(r => setTimeout(r, 3000));
                 },
-                "stitch google templates": async () => {await this.stitch_with_google_templates()},
-                "Mapear imágenes": async () => {await this.MapearImágenes();},
-                "Config": async () => {await this.Config()},
+                [this.keyWordsOptions["Stitch Google templates"]]: async () => {await this.stitch_with_google_templates()},
+                [this.keyWordsOptions["Mapear imágenes"]]: async () => {await this.MapearImágenes();},
+                [this.keyWordsOptions["Config"]]: async () => {await this.Config()},
                 "separator_0": "",
-                "Salir": async () => { loop = false; },
+                [this.keyWordsOptions["Salir"]]: async () => { loop = false; },
                 "separator_1": "",
             })
         }
@@ -65,7 +74,7 @@ export default class Console {
             {
                 type: "autocomplete",
                 name: "icono",
-                message: "Busca un icono:",
+                message: this.keyWordsOptions["Buscar un icono:"],
                 source: (_answers, input) => buscar(input || "")
             }
         ]);
@@ -91,18 +100,18 @@ export default class Console {
 
     private static async MapearImágenes() {
         await menuOptions({
-            "for base": async () => {
+            [this.keyWordsOptions["For base"]]: async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), null);
             },
-            "for react": async () => {
+            [this.keyWordsOptions["For react"]]: async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), "react");
             },
-            "for static (vite ts)": async () => {
+            [this.keyWordsOptions["For static (vite ts)"]]: async () => {
                 const { value } = await inquirer.prompt([
                     {
                         type: "input",
                         name: "value",
-                        message: `Nombre modulo`,
+                        message: this.keyWordsOptions[`Nombre modulo`],
                         validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
                     }
                 ]);
@@ -114,12 +123,12 @@ export default class Console {
                     await new Promise(r => setTimeout(r, 3000));
                 }
             },
-             "for static (vite js)": async () => {
+             [this.keyWordsOptions["For static (vite js)"]]: async () => {
                 const { value } = await inquirer.prompt([
                     {
                         type: "input",
                         name: "value",
-                        message: `Nombre modulo`,
+                        message: this.keyWordsOptions[`Nombre modulo`],
                         validate: (v) => v.trim() === "" ? "No puede estar vacío" : true,
                     }
                 ]);
@@ -131,21 +140,21 @@ export default class Console {
                     await new Promise(r => setTimeout(r, 3000));
                 }
             },
-            "for lit": async () => {
+            [this.keyWordsOptions["For lit"]]: async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), "lit");
             },
-            "volver":()=>{},
+            [this.keyWordsOptions["Volver"]]:()=>{},
         })
     }
 
     private static async RemplaceToSvg(){
         await menuOptions({
-            "file": async () => {
+            [this.keyWordsOptions["Archivo"]]: async () => {
                 const file = await selectFile();
                 if (!file) return;
                 await InjectIcons(GoogleFonts.getDownloadPath(), file);
             },
-            "directory": async () => {
+            [this.keyWordsOptions["Directorio"]]: async () => {
                 const dir = await selectDirectory();
                 if (!dir) return;
                 const allFiles = await getSourceFiles(dir);
@@ -154,19 +163,19 @@ export default class Console {
                     await new Promise(r => setTimeout(r, 100));
                 }
             },
-            "exit":()=>{},
+            [this.keyWordsOptions["Volver"]]:()=>{},
         })
     }
 
     private static async Config(){
         await menuOptions({
-            "dir descargas": async () => {
+            [this.keyWordsOptions["Dir descargas"]]: async () => {
                 const dir = await selectDirectory();
                 if (!dir) return;
                 console.log("Directorio seleccionado:", dir);
                 await GoogleFonts.setDirDownloads(dir)
             },
-            "time icon": async () => {
+            [this.keyWordsOptions["Time icon"]]: async () => {
                 const { value } = await inquirer.prompt([
                     {
                         type: "input",
@@ -177,7 +186,7 @@ export default class Console {
                 ]);
                 try { this.iconTime = parseInt(value); } catch (error) { }
             },
-            "time search": async () => {
+            [this.keyWordsOptions["Time search"]]: async () => {
                 const { value } = await inquirer.prompt([
                     {
                         type: "input",
@@ -188,37 +197,37 @@ export default class Console {
                 ]);
                 try { this.searchTime = parseInt(value); } catch (error) { }
             },
-            "volver":async ()=>{},
+            [this.keyWordsOptions["Volver"]]:async ()=>{},
         })
     }
 
     private static async stitch_with_google_templates(){
         await GoogleFonts.init();
         const extract = async()=>await menuOptions({
-            "Archivo": async () => {
+            [this.keyWordsOptions["Archivo"]]: async () => {
                 const file = await selectFile();
                 if (!file) return;
                 console.log("Archivo seleccionado:", file);
                 await this.downloadIconToFile(file)
                 await new Promise(r => setTimeout(r, 1000));
             },
-            "Recursivo": async () => {
+            [this.keyWordsOptions["Recursivo"]]: async () => {
                 const dir = await selectDirectory();
                 if (!dir) return;
                 console.log("Directorio seleccionado:", dir);
                 await this.downloadIconToDir(dir)
                 await new Promise(r => setTimeout(r, 1000));
             },
-            "volver":async ()=>{},
+            [this.keyWordsOptions["Volver"]]:async ()=>{},
         })
 
         await menuOptions({
-            "Extraer iconos": extract,
-            "Implementar iconos": async () => {
+            [this.keyWordsOptions["Extraer iconos"]]: extract,
+            [this.keyWordsOptions["Implementar iconos"]]: async () => {
                 await this.RemplaceToSvg()
                 await new Promise(r => setTimeout(r, 1000));
             },
-            "volver":async ()=>{},
+            [this.keyWordsOptions["Volver"]]:async ()=>{},
         })
     }
 }
