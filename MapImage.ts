@@ -112,12 +112,22 @@ function generateIndexForDir(dir: string, framework: Framework): void {
 
 // Helper para crear componentes SVG en React
 export function createSvgComponent(svgString: string) {
-  return function SvgComponent(props) {
-    return (
-      <span
-        {...props}
-        dangerouslySetInnerHTML={{ __html: svgString }}
-      />
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(svgString, "image/svg+xml");
+  const svgElement = doc.documentElement; // <svg>
+
+  return function SvgComponent(props: React.SVGProps<SVGSVGElement>) {
+    return React.cloneElement(
+      React.createElement(svgElement.tagName, {
+        // atributos originales del svg
+        ...Object.fromEntries(
+          [...svgElement.attributes].map(a => [a.name, a.value])
+        ),
+        // props que tú le pasas
+        ...props,
+        // contenido interno del svg
+        dangerouslySetInnerHTML: { __html: svgElement.innerHTML },
+      })
     );
   };
 }`;
