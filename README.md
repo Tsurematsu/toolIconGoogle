@@ -1,120 +1,139 @@
-# CLI de Automatización para Google Material Symbols
+# Automation CLI for Google Material Symbols
 
-Esta herramienta de línea de comandos (CLI) está diseñada para automatizar el flujo de trabajo con iconos de **Google Fonts (Material Symbols)** en proyectos de desarrollo web (React, Lit, o Vanilla TS).
+This command-line tool (CLI) is designed to automate the workflow with **Google Fonts (Material Symbols)** icons in web development projects (React, Lit, or Vanilla TS).
 
-Permite buscar, descargar, mapear y reemplazar automáticamente referencias de iconos en tu código fuente, transformando etiquetas `<span>` estáticas en componentes o variables importadas de forma segura.
+It allows you to search, download, map, and automatically replace icon references in your source code, transforming static `<span>` tags into safely imported components or variables.
 
+## 🚀 Main Features
 
-
-## 🚀 Características Principales
-
-*   🔍 **Búsqueda Interactiva:** Autocompletado para buscar iconos en la librería de Google.
-*   ⬇️ **Descarga Automática:** Descarga los SVGs optimizados localmente.
-*   bot **Escaneo de Código (Stitch):** Lee tus archivos `.tsx` o `.ts`, detecta qué iconos estás usando y los descarga automáticamente.
-*   🗺️ **Mapeo de Assets:** Genera archivos `index.ts` o `index.tsx` que exportan tus iconos como objetos organizados.
-*   💉 **Inyección de Código:** Reemplaza automáticamente los `<span>` de tus archivos por componentes React o directivas Lit.
+* 🔍 **Interactive Search:** Autocomplete search for icons in the Google library.
+* ⬇️ **Automatic Download:** Downloads optimized SVGs locally.
+* bot **Code Scanning (Stitch):** Reads your `.tsx` or `.ts` files, detects which icons you are using, and downloads them automatically.
+* 🗺️ **Asset Mapping:** Generates `index.ts` or `index.tsx` files that export your icons as organized objects.
+* 💉 **Code Injection:** Automatically replaces `<span>` tags in your files with React components or Lit directives.
 
 ---
 
-## ¿Como usarlo?
+## How to use it?
 
-# Primero instalar
+# First install
+
 ```hs
     npm install -g toolicongoogle
 ```
 
-# En la consola de tu espacio de trabajo ejecutas
+# In your workspace terminal run:
+
 ```hs
     fontsgo
 ```
 
-## 📖 Guía de Opciones del Menú
+## 📖 Menu Options Guide
 
-Al iniciar la CLI, verás las siguientes opciones principales:
+When you start the CLI, you will see the following main options:
 
-### 1. 🔍 Buscar icono
-Esta opción permite buscar y descargar un icono individual manualmente sin necesidad de tenerlo en el código.
-*   Se abrirá un buscador con **autocompletado**.
-*   Escribe el nombre (ej: `account_balance`).
-*   Al seleccionar, el icono se descargará en tu directorio de assets configurado.
+### 1. 🔍 Search icon
+
+This option lets you manually search and download an individual icon without needing it to exist already in your code.
+
+* An **autocomplete** search box will open.
+* Type the icon name (e.g., `account_balance`).
+* Once selected, the icon will be downloaded to your configured assets directory.
 
 ### 2. 🧵 Stitch Google Templates
-Es el núcleo de la automatización. Conecta tu código fuente con la librería de iconos.
 
-#### ➤ Extraer iconos
-Analiza tu código en busca de referencias a iconos (elementos con la clase `material-symbols-outlined`) y descarga los que falten.
-*   **Archivo:** Selecciona un archivo específico `.js`, `.ts`, `.jsx` o `.tsx`.
-*   **Recursivo:** Selecciona una carpeta completa. La herramienta escaneará todos los archivos dentro de ella (y subcarpetas) buscando nombres de iconos para descargarlos.
+This is the core of the automation. It connects your source code with the icon library.
 
-#### ➤ Implementar iconos
-Modifica tu código fuente para usar los iconos descargados y mapeados, reemplazando el HTML estático por código dinámico.
-*   **File / Directory:** Selecciona el archivo o carpeta destino.
-*   **Acción:** Busca estructuras `<span class="material-symbols-outlined">nombre_icono</span>` y las sustituye por:
-    *   React: `<assets.nombreIcono />`
-    *   Lit: `${() => assets.nombreIcono}`
+#### ➤ Extract icons
 
-### 3. 🗺️ Mapear imágenes
-Genera un archivo `index.ts` (o `.tsx`) en tu carpeta de descargas que exporta todos los iconos descargados como un objeto estructurado.
+Scans your code for icon references (elements with the class `material-symbols-outlined`) and downloads any missing icons.
 
-*   **For Base (`null`):** Exporta los SVGs como strings simples dentro de un archivo `.ts`. Ideal para Vanilla JS/TS.
-*   **For React:** Exporta componentes funcionales de React. Genera un archivo `.tsx` con un helper para inyectar el SVG.
-*   **For Lit:** Exporta funciones que retornan `unsafeHTML(svg)`. Genera un archivo `.ts`.
+* **File:** Select a specific `.js`, `.ts`, `.jsx`, or `.tsx` file.
+* **Recursive:** Select an entire folder. The tool will scan all files inside it (and subfolders), searching for icon names to download.
+
+#### ➤ Implement icons
+
+Modifies your source code to use the downloaded and mapped icons, replacing static HTML with dynamic code.
+
+* **File / Directory:** Select the target file or folder.
+* **Action:** Searches for structures like `<span class="material-symbols-outlined">icon_name</span>` and replaces them with:
+
+  * React: `<assets.iconName />`
+  * Lit: `${() => assets.iconName}`
+
+### 3. 🗺️ Map images
+
+Generates an `index.ts` (or `.tsx`) file in your download folder that exports all downloaded icons as a structured object.
+
+* **For Base (`null`):** Exports SVGs as raw strings inside a `.ts` file. Ideal for Vanilla JS/TS.
+* **For React:** Exports React functional components. Generates a `.tsx` file with a helper to inject the SVG.
+* **For Lit:** Exports functions that return `unsafeHTML(svg)`. Generates a `.ts` file.
 
 ### 4. ⚙️ Config
-Configuración global de la herramienta.
 
-*   **Dir descargas:** Define la ruta absoluta donde se guardarán los archivos `.svg` y donde se generará el archivo `index`.
-*   **Time icon:** Define el tiempo de espera (en ms) entre descargas para evitar bloqueos por *rate limiting*.
-*   **Time search:** Define el tiempo de espera (en ms) para las peticiones de búsqueda.
+Global configuration for the tool.
 
----
-
-## ⚡ Flujo de Trabajo Recomendado
-
-Para sacar el máximo provecho a la herramienta, sigue este orden:
-
-1.  **Configuración Inicial:**
-    *   Ve a `Config` > `Dir descargas` y selecciona tu carpeta `src/assets` (o similar).
-
-2.  **Desarrollo (UI):**
-    *   Escribe tu código HTML/JSX normalmente usando los nombres de los iconos:
-        ```tsx
-        <span className="material-symbols-outlined">rocket_launch</span>
-        ```
-
-3.  **Extracción y Descarga:**
-    *   Ve a `stitch google templates` > `Extraer iconos` > `Recursivo`.
-    *   Selecciona tu carpeta `src`. La CLI encontrará "rocket_launch" y descargará `rocket_launch.svg`.
-
-4.  **Mapeo:**
-    *   Ve a `Mapear imágenes` > Selecciona tu framework (ej. `for react`).
-    *   Esto creará `src/assets/index.tsx` con el componente listo.
-
-5.  **Inyección:**
-    *   Ve a `stitch google templates` > `Implementar iconos`.
-    *   Selecciona tu archivo o carpeta.
-    *   Tu código cambiará automáticamente a:
-        ```tsx
-        import assets from "../assets";
-        // ...
-        <assets.rocketLaunch />
-        ```
+* **Download dir:** Defines the absolute path where `.svg` files will be saved and where the `index` file will be generated.
+* **Time icon:** Sets the delay (in ms) between downloads to avoid *rate limiting*.
+* **Time search:** Sets the delay (in ms) for search requests.
 
 ---
 
-## 🛠️ Tecnologías
+## ⚡ Recommended Workflow
 
-*   **Node.js & TypeScript**
-*   **Inquirer.js:** Para la interfaz interactiva de terminal.
-*   **Google Fonts API:** Fuente de los iconos.
+To get the most out of the tool, follow this order:
+
+1. **Initial Setup:**
+
+   * Go to `Config` > `Download dir` and select your `src/assets` folder (or similar).
+
+2. **Development (UI):**
+
+   * Write your HTML/JSX code normally using the icon names:
+
+     ```tsx
+     <span className="material-symbols-outlined">rocket_launch</span>
+     ```
+
+3. **Extraction and Download:**
+
+   * Go to `stitch google templates` > `Extract icons` > `Recursive`.
+   * Select your `src` folder. The CLI will find "rocket_launch" and download `rocket_launch.svg`.
+
+4. **Mapping:**
+
+   * Go to `Map images` > Select your framework (e.g., `for react`).
+   * This will create `src/assets/index.tsx` with the ready-to-use component.
+
+5. **Injection:**
+
+   * Go to `stitch google templates` > `Implement icons`.
+   * Select your file or folder.
+   * Your code will automatically change to:
+
+     ```tsx
+     import assets from "../assets";
+     // ...
+     <assets.rocketLaunch />
+     ```
 
 ---
 
-## ⚠️ Notas Importantes
+## 🛠️ Technologies
 
-*   La herramienta ignora automáticamente la carpeta `node_modules` durante los escaneos recursivos.
-*   Asegúrate de ejecutar `Mapear imágenes` antes de `Implementar iconos`, ya que la inyección depende de que exista el objeto `assets` generado.
-*   La inyección de iconos verifica si el archivo es `.ts` (Lit) o `.tsx` (React) para aplicar la sintaxis correcta.
+* **Node.js & TypeScript**
+* **Inquirer.js:** For the interactive terminal interface.
+* **Google Fonts API:** Source of the icons.
+
+---
+
+## ⚠️ Important Notes
+
+* The tool automatically ignores the `node_modules` folder during recursive scans.
+* Be sure to run `Map images` before `Implement icons`, because injection depends on the generated `assets` object.
+* Icon injection checks whether the file is `.ts` (Lit) or `.tsx` (React) to apply the correct syntax.
+
 
 # Reconocimentos 
-- Kaitovid [https://github.com/Kaitovid] "gracias por probar la herramienta"
+- Kaitovid [https://github.com/Kaitovid] "Gracias por probar la herramienta"
+- Leandro-Calderon [https://github.com/Leandro-Calderon] "Gracias por sugerir traducción readme al ingles"

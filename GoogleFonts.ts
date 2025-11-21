@@ -97,5 +97,6 @@ export default class GoogleFonts{
         });
         const script = await fs.readFileSync(path.resolve(__dirname, "./GoogleFontsScript.js"), 'utf8');
         await this.page.evaluate((r) => { (eval(`()=>{ ${r} }`))(); }, script);
+        await new Promise(r => setTimeout(r, 3000));
     }
 }

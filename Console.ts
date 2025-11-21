@@ -43,7 +43,6 @@ export default class Console {
                 "Buscar icono": async () => {
                     console.clear()
                     await GoogleFonts.init();
-                    await new Promise(r => setTimeout(r, 3000));
                     await Console.search();
                     await new Promise(r => setTimeout(r, 3000));
                 },
@@ -108,7 +107,12 @@ export default class Console {
                     }
                 ]);
                 const basePath = process.cwd()
-                await generateImageMap(basePath, value);
+                try {
+                    await generateImageMap(basePath, String(value).replaceAll(" ", "_"));
+                } catch (error) {
+                    console.log("Nombre invalido");
+                    await new Promise(r => setTimeout(r, 3000));
+                }
             },
              "for static (vite js)": async () => {
                 const { value } = await inquirer.prompt([
@@ -120,7 +124,12 @@ export default class Console {
                     }
                 ]);
                 const basePath = process.cwd()
-                await generateImageMap(basePath, value, 'js');
+                try {
+                    await generateImageMap(basePath, String(value).replaceAll(" ", "_"), 'js');
+                } catch (error) {
+                    console.log("Nombre invalido");
+                    await new Promise(r => setTimeout(r, 3000));
+                }
             },
             "for lit": async () => {
                 await MapImage(GoogleFonts.getDownloadPath(), "lit");
@@ -185,7 +194,6 @@ export default class Console {
 
     private static async stitch_with_google_templates(){
         await GoogleFonts.init();
-        await new Promise(r => setTimeout(r, 3000));
         const extract = async()=>await menuOptions({
             "Archivo": async () => {
                 const file = await selectFile();
